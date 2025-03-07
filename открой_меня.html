@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С 8 Марта, Дашуля!</title>
+    <style>
+        body {
+            background-color: #ffe6f2;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .title {
+            color: #800080;
+            font-size: 32px;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 0px;
+        }
+        .content {
+            display: flex;
+            width: 80%;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .poem {
+            text-align: left;
+            font-size: 18px;
+            color: #d63384;
+            white-space: pre-line;
+            width: 45%;
+        }
+        .heart-container {
+            width: 45%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">С 8 Марта, Дашуля!</h1>
+    <div class="content">
+        <div class="poem">
+            <p>
+                Даша, свет в душе моей,  
+                Ты родней, чем солнце дней.  
+                Без тебя тускнеет свет,  
+                Мир теряет свой сюжет.  
+
+                Голос — музыка дождя,  
+                В нём тепло и глубина.  
+                Взгляд чарует, как рассвет,  
+                Где сомнения нет.  
+
+                Помню парк среди аллей,  
+                Листья кружат над тобой.  
+                Ты смеялась — каждый звук  
+                Разжигал в груди огонь.  
+
+                Ты, как ветер в парусах,  
+                Даришь крылья, гонишь страх.  
+                Я иду за этим светом,  
+                Словно путник вслед за летом.  
+
+                Пусть пройдут века и дни —  
+                Ты живёшь в моей судьбе.  
+                Без тебя весь мир безликий,  
+                Словно вечер в тишине.  
+
+                Ты мой путь, моя звезда,  
+                Ты во всём, везде, всегда.  
+                Смысл мой, душа и вечность,  
+                Ты — любовь и бесконечность.  
+            </p>
+        </div>
+        <div class="heart-container">
+            <canvas id="heartCanvas" width="300" height="300"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("heartCanvas");
+        const ctx = canvas.getContext("2d");
+
+        function drawHeart(x, y, size, color, scale) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(x, y + size * scale / 4);
+            ctx.bezierCurveTo(
+                x + size * scale, y - size * scale, 
+                x + size * scale * 2, y + size * scale / 2, 
+                x, y + size * scale * 2
+            );
+            ctx.bezierCurveTo(
+                x - size * scale * 2, y + size * scale / 2, 
+                x - size * scale, y - size * scale, 
+                x, y + size * scale / 4
+            );
+            ctx.fill();
+        }
+
+        let scale = 0;
+        function animateHeart() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (scale < 1) {
+                scale += 0.02; 
+                drawHeart(150, 80, 70, "#ff4081", scale); 
+                requestAnimationFrame(animateHeart);
+            } else {
+                drawHeart(150, 80, 70, "#ff4081", 1);
+            }
+        }
+
+        animateHeart();
+    </script>
+</body>
+</html>
